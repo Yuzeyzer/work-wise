@@ -79,6 +79,7 @@ export const CreateJobPopup = () => {
                   type="text"
                   name="title"
                   placeholder="Title"
+                  required
                 />
               </div>
               <div className="col-lg-12">
@@ -99,6 +100,7 @@ export const CreateJobPopup = () => {
                   placeholder="Skills"
                   onChange={handleChangeSkills}
                   onKeyDown={handleChangeSkills}
+                  required
                 />
                 {Array.isArray(job.tags) && job.tags.length > 0 && (
                   <ul className="skill-tags">
@@ -117,6 +119,7 @@ export const CreateJobPopup = () => {
                     type="text"
                     name="rate"
                     placeholder="Price"
+                    required
                   />
                   <i className="la la-dollar"></i>
                 </div>
@@ -134,6 +137,7 @@ export const CreateJobPopup = () => {
                   name="description"
                   placeholder="Description"
                   onChange={handleChange}
+                  required
                 ></textarea>
               </div>
               <div className="col-lg-12">
