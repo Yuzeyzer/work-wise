@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Login } from "../../components/Login/Login";
 import logo from "images/cm-logo.png";
 import mainImg from "images/cm-main-img.png";
@@ -14,9 +14,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const AuthTabsController = ({ showLogin, setShowLogin }) => (
+  <ul className="sign-control">
+    <li className={showLogin ? "current" : ""}>
+      <a href="#" onClick={() => setShowLogin(true)}>
+        Sign in
+      </a>
+    </li>
+    <li className={!showLogin ? "current" : ""}>
+      <a href="#" onClick={() => setShowLogin(false)}>
+        Sign up
+      </a>
+    </li>
+  </ul>
+);
+
 export const Auth = () => {
   const classes = useStyles();
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
     <Box className={classes.root}>
       <div className="sign-in-page">
@@ -37,8 +53,21 @@ export const Auth = () => {
                 </div>
               </div>
               <div className="col-lg-6">
-                {showLogin && <Login />}
-                {!showLogin && <SignUp />}
+                {showLogin ? (
+                  <Login>
+                    <AuthTabsController
+                      showLogin={showLogin}
+                      setShowLogin={setShowLogin}
+                    />
+                  </Login>
+                ) : (
+                  <SignUp>
+                    <AuthTabsController
+                      showLogin={showLogin}
+                      setShowLogin={setShowLogin}
+                    />
+                  </SignUp>
+                )}
               </div>
             </div>
           </div>

@@ -8,34 +8,34 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
-  const signup = async (email, password, name, file) => {
+  const signup = async ({ username, password, name, file }) => {
     setError(null);
     setIsPending(true);
 
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
-        email,
+        username + "@workwise.com",
         password
       );
 
-      const uploadPath = `avatars/${response.user.uid}/${file.name}`;
-      const imgRef = ref(storage, uploadPath);
-      const uploadedImg = await uploadBytesResumable(imgRef, file);
-      const imgUrl = await getDownloadURL(uploadedImg.ref);
+      // const uploadPath = `avatars/${response.user.uid}/${file.name}`;
+      // const imgRef = ref(storage, uploadPath);
+      // const uploadedImg = await uploadBytesResumable(imgRef, file);
+      // const imgUrl = await getDownloadURL(uploadedImg.ref);
 
       const usersRef = doc(firestore, "users", response.user.uid);
 
       await setDoc(usersRef, {
         isOnline: true,
-        displayName: name,
-        photoURL: imgUrl,
-        email,
+        displayName: username,
+        photoURL: 'https://www.misemacau.org/wp-content/uploads/2015/11/avatar-placeholder-01-300x250.png',
+        email: username + "@workwise.com",
       });
 
       await updateProfile(response.user, {
         displayName: name,
-        photoURL: imgUrl,
+        photoURL: 'https://www.misemacau.org/wp-content/uploads/2015/11/avatar-placeholder-01-300x250.png',
       });
 
       setIsPending(false);

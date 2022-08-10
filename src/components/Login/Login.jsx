@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography } from "@mui/material";
-export const Login = () => {
+
+export const Login = ({ children }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="login-sec">
-      <div className="sign_in_sec current">
+      {children && children}
+      <div className="sign_in_sec">
         <Typography variant="h3">Sign in</Typography>
-        <h3>Sign in</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-lg-12 no-pdd">
               <div className="sn-field">
-                <input type="text" name="username" placeholder="Username" />
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                />
                 <i className="la la-user"></i>
               </div>
             </div>
             <div className="col-lg-12 no-pdd">
               <div className="sn-field">
-                <input type="password" name="password" placeholder="Password" />
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
                 <i className="la la-lock"></i>
               </div>
             </div>
@@ -24,7 +44,7 @@ export const Login = () => {
               <div className="checky-sec">
                 <div className="fgt-sec">
                   <input type="checkbox" name="cc" id="c1" />
-                  <label for="c1">
+                  <label htmlFor="c1">
                     <span></span>
                   </label>
                   <small>Remember me</small>

@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSignup } from "hooks/useSignup";
 
-export const SignUp = () => {
+export const SignUp = ({ children }) => {
+  const { signup } = useSignup();
+  const [form, setForm] = useState({
+    username: "",
+    category: "",
+    country: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [confirmed, setConfirmed] = useState(false);
+
+  const handleChange = (event) => {
+    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!confirmed) return;
+
+    await signup(form);
+  };
+
   return (
     <div className="login-sec">
-      <div className="sign_in_sec current">
+      {children && children}
+      <div className="sign_in_sec">
         <div className="signup-tab">
           <i className="fa fa-long-arrow-left"></i>
           <h2>johndoe@example.com</h2>
@@ -21,23 +45,33 @@ export const SignUp = () => {
           </ul>
         </div>
         <div className="dff-tab current">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row">
               <div className="col-lg-12 no-pdd">
                 <div className="sn-field">
-                  <input type="text" name="name" placeholder="Full Name" />
+                  <input
+                    type="text"
+                    name="username"
+                    onChange={handleChange}
+                    placeholder="Username"
+                  />
                   <i className="la la-user"></i>
                 </div>
               </div>
               <div className="col-lg-12 no-pdd">
                 <div className="sn-field">
-                  <input type="text" name="country" placeholder="Country" />
+                  <input
+                    type="text"
+                    name="country"
+                    onChange={handleChange}
+                    placeholder="Country"
+                  />
                   <i className="la la-globe"></i>
                 </div>
               </div>
               <div className="col-lg-12 no-pdd">
                 <div className="sn-field">
-                  <select>
+                  <select onChange={handleChange} name="category">
                     <option>Category</option>
                     <option>Category 1</option>
                     <option>Category 2</option>
@@ -56,6 +90,7 @@ export const SignUp = () => {
                     type="password"
                     name="password"
                     placeholder="Password"
+                    onChange={handleChange}
                   />
                   <i className="la la-lock"></i>
                 </div>
@@ -64,8 +99,9 @@ export const SignUp = () => {
                 <div className="sn-field">
                   <input
                     type="password"
-                    name="repeat-password"
+                    name="confirmPassword"
                     placeholder="Repeat Password"
+                    onChange={handleChange}
                   />
                   <i className="la la-lock"></i>
                 </div>
@@ -73,8 +109,14 @@ export const SignUp = () => {
               <div className="col-lg-12 no-pdd">
                 <div className="checky-sec st2">
                   <div className="fgt-sec">
-                    <input type="checkbox" name="cc" id="c2" />
-                    <label for="c2">
+                    <input
+                      type="checkbox"
+                      name="cc"
+                      id="c2"
+                      onChange={(e) => setConfirmed(e.target.value)}
+                      value={confirmed}
+                    />
+                    <label htmlFor="c2">
                       <span></span>
                     </label>
                     <small>
@@ -135,7 +177,7 @@ export const SignUp = () => {
                 <div className="checky-sec st2">
                   <div className="fgt-sec">
                     <input type="checkbox" name="cc" id="c3" />
-                    <label for="c3">
+                    <label htmlFor="c3">
                       <span></span>
                     </label>
                     <small>
