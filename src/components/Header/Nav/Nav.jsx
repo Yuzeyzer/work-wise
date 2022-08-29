@@ -7,9 +7,9 @@ import jobsIcon from "@/assets/images/icon5.png";
 import { Notifications } from "./Notifications";
 import { Messages } from "./Messages";
 
-export const Nav = () => {
+export const Nav = ({ user }) => {
   return (
-    <nav>
+    <nav style={{ float: user ? "left" : "right" }}>
       <ul>
         <li>
           <a href="index.html" title="">
@@ -47,26 +47,28 @@ export const Nav = () => {
             Projects
           </a>
         </li>
-        <li>
-          <a href="profiles.html" title="">
-            <span>
-              <img src={profilesIcon} alt="Profiles" />
-            </span>
-            Profiles
-          </a>
-          <ul>
-            <li>
-              <a href="user-profile.html" title="">
-                User Profile
-              </a>
-            </li>
-            <li>
-              <a href="my-profile-feed.html" title="">
-                my-profile-feed
-              </a>
-            </li>
-          </ul>
-        </li>
+        {user && (
+          <li>
+            <a href="profiles.html" title="">
+              <span>
+                <img src={profilesIcon} alt="Profiles" />
+              </span>
+              Profiles
+            </a>
+            <ul>
+              <li>
+                <a href="user-profile.html" title="">
+                  User Profile
+                </a>
+              </li>
+              <li>
+                <a href="my-profile-feed.html" title="">
+                  my-profile-feed
+                </a>
+              </li>
+            </ul>
+          </li>
+        )}
         <li>
           <a href="jobs.html" title="">
             <span>
@@ -75,8 +77,12 @@ export const Nav = () => {
             Jobs
           </a>
         </li>
-        <Messages />
-        <Notifications />
+        {user && (
+          <>
+            <Messages />
+            <Notifications />
+          </>
+        )}
       </ul>
     </nav>
   );

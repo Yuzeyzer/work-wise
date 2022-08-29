@@ -1,7 +1,6 @@
 import React from "react";
-import { CreateBar } from "@/components/Posts/CreateBar";
-import { Posts } from "../../components/Posts/Posts";
-import { UserProfileSidebar } from "../../components/UserProfileSidebar/UserProfileSidebar";
+import { CreateBar, Posts, UserProfileSidebar } from "components";
+import { About, Jobs, Suggestions } from "components/Widgets";
 
 export const Home = () => {
   return (
@@ -15,6 +14,14 @@ export const Home = () => {
                 <div className="main-ws-sec">
                   <CreateBar />
                   <Posts />
+                </div>
+              </div>
+              <div className="col-lg-3 pd-right-none no-pd">
+                <div className="right-sidebar">
+                  <About />
+                  <Jobs title="Top Jobs" items={[]} />
+                  <Jobs title="Most Viewed This Week" items={[]} />
+                  <Suggestions />
                 </div>
               </div>
             </div>

@@ -4,25 +4,25 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export const UserProfileSidebar = () => {
-  const { user, isLoading } = useSelector((state) => state.authReducer);
+  const { user, isLoading } = useSelector((state) => state.auth);
 
   return (
-    <div class="col-lg-3 col-md-4 pd-left-none no-pd">
-      <div class="main-left-sidebar no-margin">
+    <div className="col-lg-3 col-md-4 pd-left-none no-pd">
+      <div className="main-left-sidebar no-margin">
         {user && (
-          <div class="user-data full-width">
-            <div class="user-profile">
-              <div class="username-dt">
-                <div class="usr-pic">
+          <div className="user-data full-width">
+            <div className="user-profile">
+              <div className="username-dt">
+                <div className="usr-pic">
                   <img src={user.photoURL} alt="" />
                 </div>
               </div>
-              <div class="user-specs">
+              <div className="user-specs">
                 <h3>{user.displayName}</h3>
                 <span>{user.role}</span>
               </div>
             </div>
-            <ul class="user-fw-status">
+            <ul className="user-fw-status">
               <li>
                 <h4>Following</h4>
                 <span>{user.following}</span>
@@ -49,80 +49,80 @@ export const UserProfileSidebar = () => {
             <CircularProgress />
           </Box>
         )}
-        <div class="suggestions full-width">
-          <div class="sd-title">
+        <div className="suggestions full-width">
+          <div className="sd-title">
             <h3>Suggestions</h3>
-            <i class="la la-ellipsis-v"></i>
+            <i className="la la-ellipsis-v"></i>
           </div>
-          <div class="suggestions-list">
-            <div class="suggestion-usd">
+          <div className="suggestions-list">
+            <div className="suggestion-usd">
               <img src="images/resources/s1.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>Jessica William</h4>
                 <span>Graphic Designer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="suggestion-usd">
+            <div className="suggestion-usd">
               <img src="images/resources/s2.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>John Doe</h4>
                 <span>PHP Developer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="suggestion-usd">
+            <div className="suggestion-usd">
               <img src="images/resources/s3.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>Poonam</h4>
                 <span>Wordpress Developer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="suggestion-usd">
+            <div className="suggestion-usd">
               <img src="images/resources/s4.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>Bill Gates</h4>
                 <span>C & C++ Developer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="suggestion-usd">
+            <div className="suggestion-usd">
               <img src="images/resources/s5.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>Jessica William</h4>
                 <span>Graphic Designer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="suggestion-usd">
+            <div className="suggestion-usd">
               <img src="images/resources/s6.png" alt="" />
-              <div class="sgt-text">
+              <div className="sgt-text">
                 <h4>John Doe</h4>
                 <span>PHP Developer</span>
               </div>
               <span>
-                <i class="la la-plus"></i>
+                <i className="la la-plus"></i>
               </span>
             </div>
-            <div class="view-more">
+            <div className="view-more">
               <a href="#" title="">
                 View More
               </a>
             </div>
           </div>
         </div>
-        <div class="tags-sec full-width">
+        <div className="tags-sec full-width">
           <ul>
             <li>
               <a href="#" title="">
@@ -165,7 +165,7 @@ export const UserProfileSidebar = () => {
               </a>
             </li>
           </ul>
-          <div class="cp-sec">
+          <div className="cp-sec">
             <img src="images/logo2.png" alt="" />
             <p>
               <img src="images/cp.png" alt="" />
