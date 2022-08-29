@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import React, { useEffect, useMemo, useState } from "react";
-import { Login } from "../../components/Login/Login";
+import React, { useEffect, useState } from "react";
+import { Login } from "../../components/Auth/Login/Login";
 import logo from "images/cm-logo.png";
 import mainImg from "images/cm-main-img.png";
 import copyImg from "images/copy-icon.png";
-import { SignUp } from "../../components/SignUp/SignUp";
+import { SignUp } from "../../components/Auth/SignUp/SignUp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,9 +30,16 @@ const AuthTabsController = ({ showLogin, setShowLogin }) => (
   </ul>
 );
 
-export const Auth = () => {
+export const Auth = ({ user }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      navigate(-1);
+    }
+  }, [user]);
 
   return (
     <Box className={classes.root}>

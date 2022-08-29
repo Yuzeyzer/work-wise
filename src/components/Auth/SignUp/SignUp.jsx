@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useSignup } from "hooks/useSignup";
+import { Typography } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = ({ children }) => {
-  const { signup } = useSignup();
+  const { signup, error } = useSignup();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
+    email: "",
     username: "",
     category: "",
     country: "",
@@ -22,28 +27,16 @@ export const SignUp = ({ children }) => {
     if (!confirmed) return;
 
     await signup(form);
+
+    if (!error) return navigate("/");
+    console.log(error);
   };
 
   return (
     <div className="login-sec">
       {children && children}
       <div className="sign_in_sec">
-        <div className="signup-tab">
-          <i className="fa fa-long-arrow-left"></i>
-          <h2>johndoe@example.com</h2>
-          <ul>
-            <li className="current">
-              <a href="#" title="">
-                User
-              </a>
-            </li>
-            <li>
-              <a href="#" title="">
-                Company
-              </a>
-            </li>
-          </ul>
-        </div>
+        <Typography variant="h3">Sign Up</Typography>
         <div className="dff-tab current">
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -56,6 +49,19 @@ export const SignUp = ({ children }) => {
                     placeholder="Username"
                   />
                   <i className="la la-user"></i>
+                </div>
+              </div>
+              <div className="col-lg-12 no-pdd">
+                <div className="sn-field">
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    placeholder="Email"
+                  />
+                  <i className="fa ">
+                    <EmailIcon fontSize="12" />
+                  </i>
                 </div>
               </div>
               <div className="col-lg-12 no-pdd">
@@ -117,67 +123,6 @@ export const SignUp = ({ children }) => {
                       value={confirmed}
                     />
                     <label htmlFor="c2">
-                      <span></span>
-                    </label>
-                    <small>
-                      Yes, I understand and agree to the workwise Terms &
-                      Conditions.
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-12 no-pdd">
-                <button type="submit" value="submit">
-                  Get Started
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div className="dff-tab" id="tab-4">
-          <form>
-            <div className="row">
-              <div className="col-lg-12 no-pdd">
-                <div className="sn-field">
-                  <input
-                    type="text"
-                    name="company-name"
-                    placeholder="Company Name"
-                  />
-                  <i className="la la-building"></i>
-                </div>
-              </div>
-              <div className="col-lg-12 no-pdd">
-                <div className="sn-field">
-                  <input type="text" name="country" placeholder="Country" />
-                  <i className="la la-globe"></i>
-                </div>
-              </div>
-              <div className="col-lg-12 no-pdd">
-                <div className="sn-field">
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                  />
-                  <i className="la la-lock"></i>
-                </div>
-              </div>
-              <div className="col-lg-12 no-pdd">
-                <div className="sn-field">
-                  <input
-                    type="password"
-                    name="repeat-password"
-                    placeholder="Repeat Password"
-                  />
-                  <i className="la la-lock"></i>
-                </div>
-              </div>
-              <div className="col-lg-12 no-pdd">
-                <div className="checky-sec st2">
-                  <div className="fgt-sec">
-                    <input type="checkbox" name="cc" id="c3" />
-                    <label htmlFor="c3">
                       <span></span>
                     </label>
                     <small>

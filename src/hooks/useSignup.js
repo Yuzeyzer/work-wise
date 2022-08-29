@@ -8,14 +8,14 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
-  const signup = async ({ username, password, name, file }) => {
+  const signup = async ({ email, password, username, file }) => {
     setError(null);
     setIsPending(true);
 
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
-        username + "@workwise.com",
+        email,
         password
       );
 
@@ -29,13 +29,15 @@ export const useSignup = () => {
       await setDoc(usersRef, {
         isOnline: true,
         displayName: username,
-        photoURL: 'https://www.misemacau.org/wp-content/uploads/2015/11/avatar-placeholder-01-300x250.png',
-        email: username + "@workwise.com",
+        photoURL:
+          "https://www.misemacau.org/wp-content/uploads/2015/11/avatar-placeholder-01-300x250.png",
+        email: email,
       });
 
       await updateProfile(response.user, {
-        displayName: name,
-        photoURL: 'https://www.misemacau.org/wp-content/uploads/2015/11/avatar-placeholder-01-300x250.png',
+        displayName: username,
+        photoURL:
+          "https://cs6.pikabu.ru/images/big_size_comm/2017-07_6/150107074618005869.jpg",
       });
 
       setIsPending(false);

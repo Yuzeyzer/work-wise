@@ -1,12 +1,30 @@
 import React, { useState } from "react";
 import { Typography } from "@mui/material";
+import { useLogin } from "hooks/useLogin";
+import EmailIcon from "@mui/icons-material/Email";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserAction } from "../store/actions";
 
 export const Login = ({ children }) => {
-  const [username, setUsername] = useState("");
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const { login, error } = useLogin();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const user = await login(email, password);
+
+    if (!error) {
+      dispatch(setUserAction(user));
+      return navigate("/");
+    }
   };
 
   return (
@@ -19,13 +37,15 @@ export const Login = ({ children }) => {
             <div className="col-lg-12 no-pdd">
               <div className="sn-field">
                 <input
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="text"
-                  name="username"
-                  placeholder="Username"
+                  name="email"
+                  placeholder="Email"
                 />
-                <i className="la la-user"></i>
+                <i className="la">
+                  <EmailIcon fontSize="12" />
+                </i>
               </div>
             </div>
             <div className="col-lg-12 no-pdd">
