@@ -11,11 +11,12 @@ import {
 } from "./components/Auth/store/actions";
 import { useDispatch } from "react-redux";
 import { getDocument } from "./hooks/useDocument";
+import { MyProfileFeed } from "./pages/MyProfileFeed/MyProfileFeed";
 
 function App() {
   const [user, setUser] = useState();
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (_user) => {
@@ -35,10 +36,11 @@ function App() {
   return (
     <div className="App">
       <div className="wrapper">
-        {location.pathname !== '/auth' && <Header />}
+        {location.pathname !== "/auth" && <Header />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth user={user} />} />
+          <Route path="/my-profile-feed" element={<MyProfileFeed />} />
         </Routes>
       </div>
     </div>

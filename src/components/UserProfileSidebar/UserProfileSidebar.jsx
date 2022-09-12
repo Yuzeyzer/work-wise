@@ -1,7 +1,8 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Skeleton } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { UserProfileSidebarSkeleton } from "./UserProfileSidebarSkeleton";
 
 export const UserProfileSidebar = () => {
   const { user, isLoading } = useSelector((state) => state.auth);
@@ -14,7 +15,7 @@ export const UserProfileSidebar = () => {
             <div className="user-profile">
               <div className="username-dt">
                 <div className="usr-pic">
-                  <img src={user.photoURL} alt="" />
+                  <img width={110} height={110} src={user.photoURL} alt="" />
                 </div>
               </div>
               <div className="user-specs">
@@ -39,16 +40,7 @@ export const UserProfileSidebar = () => {
             </ul>
           </div>
         )}
-        {isLoading && (
-          <Box
-            py={4}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <CircularProgress />
-          </Box>
-        )}
+        {isLoading && <UserProfileSidebarSkeleton />}
         <div className="suggestions full-width">
           <div className="sd-title">
             <h3>Suggestions</h3>

@@ -6,6 +6,7 @@ import profilesIcon from "@/assets/images/icon4.png";
 import jobsIcon from "@/assets/images/icon5.png";
 import { Notifications } from "./Notifications";
 import { Messages } from "./Messages";
+import { Link } from "react-router-dom";
 
 export const Nav = ({ user }) => {
   return (
@@ -62,9 +63,9 @@ export const Nav = ({ user }) => {
                 </a>
               </li>
               <li>
-                <a href="my-profile-feed.html" title="">
+                <Link to="my-profile-feed" title="">
                   my-profile-feed
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
